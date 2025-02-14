@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín ❤️</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heartss"></div>
+        <div class="envelope" onclick="openLetter()">
+            <div class="flap"></div>
+            <div class="letter">
+                <p id="letterText"></p>
+            </div>
+        </div>
+        <h2 class="click-instruction">📩 Haz clic en el sobre para abrir la carta</h2>
+        <h2>Galería de Recuerdos</h2>
+        <div class="gallery">
+            <img src="img/imagen1.jpg" alt="Recuerdo 1">
+            <img src="img/imagen2.jpg" alt="Recuerdo 2">
+            <img src="img/imagen3.jpg" alt="Recuerdo 3">
+        </div>
+        <button onclick="showSurprise()">Presiona para una sorpresa</button>
+        
+        <div id="surprise" class="hidden">
+            <h1>¡TE AMO MUCHOCHOTE! ❤️</h3>
+            <h2>Eres la persona más especial en mi vida.</h2>
+            <div class="hearts"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const instruction = document.querySelector(".click-instruction");
+            setInterval(() => {
+                instruction.style.opacity = instruction.style.opacity == "0" ? "1" : "0";
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
