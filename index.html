@@ -1,11 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz San Valentín ❤️</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos responsivos */
+        .container {
+            max-width: 90%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /*.gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }*/
+        .gallery {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev { left: 0; }
+        .next { right: 0; }
+        
+        /*.envelope {
+            width: 150px;
+            height: 100px;
+            margin: auto;
+        }*/
+
+        .click-instruction {
+            font-size: 1.2rem;
+            animation: blink 1s infinite alternate;
+        }
+
+        @keyframes blink {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            background: #ff4d6d;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ff1c4e;
+        }
+
+        #surprise {
+            max-width: 90%;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #surprise h1,
+        #surprise h2 {
+            /*word-wrap: break-word;*/
+            /*max-width: 100%;*/
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            /*.envelope {
+                width: 120px;
+                height: 80px;
+            }*/
+
+            .click-instruction {
+                font-size: 1rem;
+                text-align: center;
+                padding: 10px;
+                display: block;
+            }
+
+            #surprise {
+                padding: 10px;
+            }
+
+            /*#surprise h1 {
+                font-size: 1.2rem;
+            }
+
+            #surprise h2 {
+                font-size: 1rem;
+            }*/
+            .letter {
+                max-width: 180px;
+                font-size: 0.9rem;
+            }
+
+            .click-instruction {
+                font-size: 1rem;
+                text-align: center;
+                padding: 10px;
+                display: block;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <div class="heartss"></div>
@@ -15,17 +154,21 @@
                 <p id="letterText"></p>
             </div>
         </div>
-        <h2 class="click-instruction">📩 Haz clic en el sobre para abrir la carta</h2>
+        <h3 class="click-instruction">📩 Haz clic en el sobre para abrir la carta</h3>
         <h2>Galería de Recuerdos</h2>
-        <div class="gallery">
-            <img src="img/imagen1.jpg" alt="Recuerdo 1">
-            <img src="img/imagen2.jpg" alt="Recuerdo 2">
-            <img src="img/imagen3.jpg" alt="Recuerdo 3">
+        <div class="gallery-container">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="gallery">
+                <img src="img/imagen1.jpg" alt="Recuerdo 1">
+                <img src="img/imagen2.jpg" alt="Recuerdo 2">
+                <img src="img/imagen3.jpg" alt="Recuerdo 3">
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
         </div>
         <button onclick="showSurprise()">Presiona para una sorpresa</button>
-        
+
         <div id="surprise" class="hidden">
-            <h1>¡TE AMO MUCHOCHOTE! ❤️</h3>
+            <h1>¡TE AMO MUCHOCHOTE! ❤️</h1>
             <h2>Eres la persona más especial en mi vida.</h2>
             <div class="hearts"></div>
         </div>
@@ -33,12 +176,42 @@
 
     <script src="script.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const instruction = document.querySelector(".click-instruction");
             setInterval(() => {
                 instruction.style.opacity = instruction.style.opacity == "0" ? "1" : "0";
             }, 1000);
         });
+
+        /*function openLetter() {
+            const letter = document.getElementById("letter");
+            letter.style.display = letter.style.display === "none" || letter.style.display === "" ? "block" : "none";
+        }*/
+
+        let slideIndex = 0;
+        function moveSlide(n) {
+            const gallery = document.querySelector(".gallery");
+            const images = document.querySelectorAll(".gallery img");
+            slideIndex += n;
+            if (slideIndex >= images.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = images.length - 1;
+            gallery.style.transform = `translateX(${-slideIndex * 100}%)`;
+        }
+
+        let startX;
+        document.getElementById("gallery-container").addEventListener("touchstart", function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.getElementById("gallery-container").addEventListener("touchend", function(e) {
+            let endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) {
+                moveSlide(1);
+            } else if (startX - endX < -50) {
+                moveSlide(-1);
+            }
+        });
     </script>
 </body>
+
 </html>
