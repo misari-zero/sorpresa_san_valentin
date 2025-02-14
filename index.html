@@ -40,7 +40,8 @@
             border-radius: 10px;
         }
 
-        .prev, .next {
+        .prev,
+        .next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -51,9 +52,14 @@
             cursor: pointer;
         }
 
-        .prev { left: 0; }
-        .next { right: 0; }
-        
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
         /*.envelope {
             width: 150px;
             height: 100px;
@@ -147,6 +153,12 @@
 
 <body>
     <div class="container">
+        <div class="container">
+            <!-- ...existing code... -->
+            <audio id="background-music" src="music/edsheran_perfect.mp3" autoplay loop></audio>
+            
+            <!-- ...existing code... -->
+        </div>
         <div class="heartss"></div>
         <div class="envelope" onclick="openLetter()">
             <div class="flap"></div>
@@ -181,6 +193,8 @@
             setInterval(() => {
                 instruction.style.opacity = instruction.style.opacity == "0" ? "1" : "0";
             }, 1000);
+            const music = document.getElementById("background-music");
+            
         });
 
         /*function openLetter() {
@@ -199,11 +213,11 @@
         }
 
         let startX;
-        document.getElementById("gallery-container").addEventListener("touchstart", function(e) {
+        document.getElementById("gallery-container").addEventListener("touchstart", function (e) {
             startX = e.touches[0].clientX;
         });
 
-        document.getElementById("gallery-container").addEventListener("touchend", function(e) {
+        document.getElementById("gallery-container").addEventListener("touchend", function (e) {
             let endX = e.changedTouches[0].clientX;
             if (startX - endX > 50) {
                 moveSlide(1);
