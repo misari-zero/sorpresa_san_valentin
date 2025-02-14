@@ -188,3 +188,21 @@ button:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease-in-out;
 }
+
+.large-text {
+    font-size: 2em; /* Ajusta el tamaño según el tamaño del h1 */
+}
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.prize-image {
+    max-width: 100%;
+    height: auto;
+    width: 800px; /* Ajusta el tamaño según tus necesidades */
+    border-radius: 10px;
+    margin-top: 20px;
+}

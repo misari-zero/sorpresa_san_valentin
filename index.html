@@ -153,12 +153,7 @@
 
 <body>
     <div class="container">
-        <div class="container">
-            <!-- ...existing code... -->
-            <audio id="background-music" src="music/edsheran_perfect.mp3" autoplay loop></audio>
-            
-            <!-- ...existing code... -->
-        </div>
+        <audio id="background-music" src="music/edsheran_perfect.mp3" autoplay loop></audio>
         <div class="heartss"></div>
         <div class="envelope" onclick="openLetter()">
             <div class="flap"></div>
@@ -178,6 +173,7 @@
             <button class="next" onclick="moveSlide(1)">&#10095;</button>
         </div>
         <button onclick="showSurprise()">Presiona para una sorpresa</button>
+        <button onclick="window.location.href='ganaste.html'">Ver Premio</button>
 
         <div id="surprise" class="hidden">
             <h1>¡TE AMO MUCHOCHOTE! ❤️</h1>
